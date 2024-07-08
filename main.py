@@ -1,19 +1,19 @@
 from pathlib import Path
-from src.utils.utils import load_transactions
+from src.utils.utils import read_data
 from src.utils.external_api import convert_to_rub
 
 def main():
     file_path = Path('data/operations.json')
-    transactions = load_transactions(file_path)
+    transactions = read_data(file_path)
 
-    if not transactions:
+    if transactions.empty:
         print("No transactions found.")
         return
 
     print(f"Number of transactions: {len(transactions)}")
 
     # Проверяем второй объект транзакции
-    first_transaction = transactions[1]
+    first_transaction = transactions.iloc[1]
     print("transaction:")
     print(first_transaction)
 
@@ -21,7 +21,7 @@ def main():
     print(f"Amount in rubles: {amount_in_rub:.2f}")
 
     total_amount = 0.0
-    for transaction in transactions:
+    for _, transaction in transactions.iterrows():
         amount_in_rub = convert_to_rub(transaction)
         total_amount += amount_in_rub
 
@@ -29,4 +29,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

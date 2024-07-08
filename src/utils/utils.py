@@ -1,6 +1,26 @@
 import json
 import logging
 from logging_config import logger_utils
+import os
+import pandas as pd
+
+def get_file_format(file_path):
+    _, file_extension = os.path.splitext(file_path)
+    if file_extension.lower() == '.csv':
+        return 'csv'
+    elif file_extension.lower() == '.xlsx':
+        return 'xlsx'
+    else:
+        return 'json'
+
+def read_data(file_path):
+    file_format = get_file_format(file_path)
+    if file_format == 'csv':
+        return pd.read_csv(file_path)
+    elif file_format == 'xlsx':
+        return pd.read_excel(file_path)
+    else:
+        return pd.read_json(file_path)
 
 def load_transactions(file_path):
     """
