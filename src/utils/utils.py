@@ -3,6 +3,7 @@ import logging
 from logging_config import logger_utils
 import os
 import pandas as pd
+import re
 
 def get_file_format(file_path):
     _, file_extension = os.path.splitext(file_path)
@@ -46,3 +47,28 @@ def another_function():
     logger_utils.warning('This is a warning message from utils module')
     logger_utils.error('This is an error message from utils module')
     logger_utils.critical('This is a critical message from utils module')
+
+def search_in_transactions(transactions, search_string):
+    """
+    Функция, которая принимает список словарей с данными о банковских операциях
+    и строку поиска, а возвращает список словарей, у которых в описании есть данная строка.
+    """
+    result = []
+    for transaction in transactions:
+        if re.search(search_string, transaction["description"], re.IGNORECASE):
+            result.append(transaction)
+    return result
+
+def count_categories(transactions, categories):
+    """
+    Функция, которая принимает список словарей с данными о банковских операциях
+    и список категорий операций, а возвращает словарь, в котором ключи — это
+    названия категорий, а значения — это количество операций в каждой категории.
+    """
+    category_counts = {category: 0 for category in categories}
+    for transaction in transactions:
+        for category in categories:
+            if re.search(category, transaction["description"], re.IGNORECASE):
+                category_counts[category] += 1
+                break
+    return category_counts
