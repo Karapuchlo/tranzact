@@ -1,8 +1,18 @@
 from pathlib import Path
 from src.utils.utils import read_data
 from src.utils.external_api import convert_to_rub
+from src.utils.utils import search_in_transactions, count_categories
 
 def main():
+    """
+    Функция, которая отвечает за основную логику проекта и связывает функциональности между собой.
+    """
+    print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
+    print("Выберите необходимый пункт меню:")
+    print("1. Получить информацию о транзакциях из JSON-файла")
+    print("2. Получить информацию о транзакциях из CSV-файла")
+    print("3. Получить информацию о транзакциях из XLSX-файла")
+
     file_path = Path('data/operations.json')
     transactions = read_data(file_path)
 
