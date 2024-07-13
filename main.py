@@ -4,7 +4,7 @@ from src.utils.external_api import convert_to_rub
 from src.utils.utils import search_in_transactions, count_categories
 
 def main():
-    """
+    """хелоу
     Функция, которая отвечает за основную логику проекта и связывает функциональности между собой.
     """
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
