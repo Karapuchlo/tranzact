@@ -72,3 +72,4 @@ def count_categories(transactions, categories):
                 category_counts[category] += 1
                 break
     return category_counts
+
