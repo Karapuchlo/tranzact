@@ -5,6 +5,17 @@ import os
 import pandas as pd
 import re
 
+
+logging.basicConfig(
+    filename='app.log',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+# Получение логгера
+logger_utils = logging.getLogger(__name__)
+
 def get_file_format(file_path):
     _, file_extension = os.path.splitext(file_path)
     if file_extension.lower() == '.csv':
@@ -72,3 +83,4 @@ def count_categories(transactions, categories):
                 category_counts[category] += 1
                 break
     return category_counts
+
